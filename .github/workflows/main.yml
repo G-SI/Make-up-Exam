@@ -62,7 +62,7 @@ jobs:
 
     - name: Wait for SonarQube
       run: |
-        until curl -sSf http://localhost:9000/api/system/health | grep -q "GREEN"; do
+        until curl -sSf -u admin:admin http://localhost:9000/api/system/health | grep -q "GREEN"; do
           echo "Waiting for SonarQube..."
           sleep 10
         done

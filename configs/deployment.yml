@@ -3,6 +3,9 @@ kind: Deployment
 
 metadata:
   name: enterprise-app
+  labels:
+    app: enterprise-app
+    environment: development
 
 spec:
   replicas: 2

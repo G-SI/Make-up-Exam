@@ -1,0 +1,51 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+  build:
+    runs-on: ubuntu-latest
+    needs: checkout
+    steps:
+      - name: Build
+        run: echo "Building application..."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run tests
+        run: echo "Running tests..."
+
+  sonar_scan:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Sonar scan
+        run: echo "Running Sonar scan..."
+
+  policy_validation:
+    runs-on: ubuntu-latest
+    needs: sonar_scan
+    steps:
+      - name: Validate policies
+        run: echo "Running OPA policy validation..."
+
+  deployment:
+    runs-on: ubuntu-latest
+    needs: policy_validation
+    steps:
+      - name: Deploy
+        run: echo "Deploying application..."

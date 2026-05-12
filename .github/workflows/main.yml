@@ -11,16 +11,12 @@ on:
 jobs:
   build-test-scan:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     services:
       sonarqube:
         image: sonarqube:lts
         ports:
           - 9000:9000
-        options: >-
-          --health-cmd="curl -f http://localhost:9000/api/system/health || exit 1"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=30
 
     steps:
     - name: Checkout Repository

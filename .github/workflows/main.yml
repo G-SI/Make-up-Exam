@@ -13,44 +13,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-    # Checkout Code
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    # Display Project Structure
     - name: Display Project Structure
       run: ls -R
 
-    # Build Stage
     - name: Build Stage
       run: echo "Building application..."
 
-    # Test Stage
     - name: Test Stage
       run: echo "Running tests..."
 
-    # SonarQube Scan
     - name: SonarQube Scan
       run: echo "SonarQube analysis completed"
 
-    # Install Conftest
     - name: Install Conftest
       run: |
         wget https://github.com/open-policy-agent/conftest/releases/download/v0.55.0/conftest_0.55.0_Linux_x86_64.tar.gz
         tar xzf conftest_0.55.0_Linux_x86_64.tar.gz
         sudo mv conftest /usr/local/bin
 
-    # Run OPA Policy Validation
     - name: Run Policy Validation
       run: |
         conftest test configs/deployment.yml --policy policies/
 
-    # Deployment Stage
     - name: Deployment Stage
       run: docker compose -f configs/docker-compose.yml up -d
 
-    # Upload Artifacts
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:

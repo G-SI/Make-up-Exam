@@ -1,8 +1,7 @@
-version: '3.8'
+version: '3'
+
 services:
   web:
-    image: nginx:latest
-    container_name: nginx-web
+    image: nginx:1.25
     ports:
       - "8080:80"
-    restart: unless-stopped

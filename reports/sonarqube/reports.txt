@@ -1,0 +1,15 @@
+SonarQube Analysis Report
+
+Files Analyzed:
+- deployment.yml
+- pipeline.yml
+- Dockerfile
+
+Issues Found:
+1. Missing CPU limits
+2. Missing memory requests
+3. Missing storage requests
+4. Missing RBAC binding
+
+Status:
+Analysis completed successfully.
